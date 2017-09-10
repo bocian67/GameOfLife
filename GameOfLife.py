@@ -1,20 +1,13 @@
+# import needed modules
 import sys
 import argparse
 import os
 from texttable import Texttable
-Cells = []
-row_align = []
-dtype = []
 
-class Cell:
-    x = 0
-    y = 0
-    alive = False
-
-    def __init__(self, x, y, alive):
-        self.x = x
-        self.y = y
-        self.alive = alive
+# define global variables
+Cells = []              # collection of all Cells
+row_align = []          # centres all Cell
+dtype = []              # defines every Cell as string
 
 
 def changeStates():
@@ -23,8 +16,6 @@ def changeStates():
 
 def playRound():
     pass
-
-
 
 
 def rebuildTemplate():
@@ -44,60 +35,83 @@ def rebuildTemplate():
     table.add_rows(columnCol)
     print(table.draw())
 
-def changeState(template, maxLength):
-    exitpress = False
-    currentCell = [0,0,0] #[x-value, y-value, awoken]
-    Cells[0][0] = '?'
-    rebuildTemplate()
-    while exitpress == False:
-        Cells[currentCell[0]][currentCell[1]]= '0'
 
-        cursor = raw_input('\nW A S D to move, E to revive cell\n')
+def changeState(maxLength):
+    # function for building customized field
+    exitpress = False
+    currentCell = [0,0] # [x-value, y-value]
+    oldState = '0'      # reset to State after ? {Query}
+    Cells[0][0] = '?'   # top-left corner as start point
+    rebuildTemplate()   # create new frame
+    while exitpress == False:   # ability to improve grid as long as the user plays
+        cursor = raw_input('\nW A S D to move\nE to revive cell\nX to exit configs\n')
+        # decide based on user input
+        # move up
         if (cursor == 'w') and (currentCell[0] > -maxLength):
+            Cells[currentCell[0]][currentCell[1]] = oldState
             currentCell[0] = int(currentCell[0]) - 1
+        # move down
         elif (cursor == 's') and (currentCell[0] < maxLength -1):
+            Cells[currentCell[0]][currentCell[1]] = oldState
             currentCell[0] = int(currentCell[0]) + 1
+        # move left
         elif (cursor == 'a') and (currentCell[1] > - maxLength):
+            Cells[currentCell[0]][currentCell[1]] = oldState
             currentCell[1] = int(currentCell[1]) - 1
+        # move right
         elif (cursor == 'd') and (currentCell[1] < maxLength -1):
+            Cells[currentCell[0]][currentCell[1]] = oldState
             currentCell[1] = int(currentCell[1]) + 1
-        elif (cursor == 'e') and (currentCell[2] == False):
-            currentCell[2] = True
-            Cells[currentCell[0]][currentCell[1]] = '1'
+        # revive or kill cell
+        elif (cursor == 'e') and (oldState == '0'):
+            Cells[currentCell[0]][currentCell[1]] = 'X'
+        elif (cursor == 'e') and (oldState == 'X'):
+                Cells[currentCell[0]][currentCell[1]] = '0'
+        # exit config
+        elif cursor == 'x':
+            exitpress = True
+
+        # clear console and re-print
         os.system('clear')
-        print currentCell
-        print maxLength
+        print(currentCell)
+        print(maxLength)
+
+        oldState = Cells[currentCell[0]][currentCell[1]]
         Cells[currentCell[0]][currentCell[1]] = '?'
         rebuildTemplate()
 
 
 def buildEmptyTemplate(maxLength):
-    print maxLength
+    # create as much cells as user inputs (IxI)
     for x in range(maxLength):
+        # centers
         row_align.append('c')
+        # defines as string
         dtype.append('s')
+        # cell_part is Row
         cell_part = []
         for item in range(maxLength):
             cell_part.append('0')
         Cells.append(cell_part)
-    #row_align = ['c', 'c', 'c', 'c']
-    #print(row_align)
-
 
 
 def main():
-    parser = argparse.ArgumentParser('Canways Game of Life!')
-    parser.add_argument('-f', metavar='NUMBER', help='Number of fields in Row and Column',\
+    # get field-number
+    parser = argparse.ArgumentParser('Conways Game of Life!')
+    parser.add_argument('-f', metavar='NUMBER', help='Number of fields in Row = Column',\
                         type=int)
     args = parser.parse_args()
     maxLength = int(args.f)
     try:
-        template = buildEmptyTemplate(maxLength)
-        game = changeState(template, maxLength)
+        # default-board
+        buildEmptyTemplate(maxLength)
+        # configure board
+        changeState(maxLength)
         while True:
+            # check all rules
             playRound()
             changeStates()
-            break
+            # break
     except KeyboardInterrupt:
         sys.exit(0)
 
