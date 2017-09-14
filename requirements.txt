@@ -1,0 +1,5 @@
+pip install -U git+http://github.com/bufordtaylor/python-texttable
+OR
+apt-get install python-texttable
+
+pip install argparse
