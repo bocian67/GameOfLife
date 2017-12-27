@@ -12,6 +12,7 @@ dtype = []              # defines every Cell as string
 new_Cells = []
 generation = 0
 
+
 def checkNearbyCells(cell, length):
     living_cells = 0
     #print(cell)
@@ -23,7 +24,8 @@ def checkNearbyCells(cell, length):
                 continue
             x = cell[0] + hor
             y = cell[1] + ver
-
+            #print x
+            #print y
             if x >= length:
                 # 7 + 1 = 8 w.A.
                 x = 0
@@ -35,15 +37,14 @@ def checkNearbyCells(cell, length):
             elif y < 0:
                 y = length - 1
 
-            #print cell
+            # print cell
             #print (str(x)+'\n'+str(y))
             #raw_input('...')
             if Cells[x][y] == 'X':
                 living_cells += 1
-
+        #print str(living_cells)+':::',
     # TODO: make a solution for the IndexError failure
     # TODO: shorten!
-
     #print(living_cells)
     return living_cells
 
@@ -153,10 +154,11 @@ def main():
                     others = checkNearbyCells([column_cell, row_cell], maxLength)
                     if ((others < 2) or (others > 3)) and new_Cells[column_cell][row_cell] == 'X':
                         new_Cells[column_cell][row_cell] = 'O'
-                    elif (others > 3) and (new_Cells[column_cell][row_cell] == 'O'):
+                    elif (others == 3) and (new_Cells[column_cell][row_cell] == 'O'):
                         new_Cells[column_cell][row_cell] = 'X'
             Cells = new_Cells
-            sleep(0.5)
+            #sleep(0.5)
+            e = raw_input()
             rebuildTemplate()
 
             # break
