@@ -1,0 +1,4 @@
+flask
+flask-cors
+Adafruit_WS2801
+RPi.GPIO
