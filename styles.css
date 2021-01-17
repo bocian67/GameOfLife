@@ -1,0 +1,33 @@
+.grid_container {
+    display: grid;
+    grid-template-columns: repeat(12, 30px);
+    grid-template-rows: repeat(12, 30px);
+    gap: 0px 0px;
+    grid-template-areas:
+        ". . . . . . . . . . . ."
+        ". . . . . . . . . . . ."
+        ". . . . . . . . . . . ."
+        ". . . . . . . . . . . ."
+        ". . . . . . . . . . . ."
+        ". . . . . . . . . . . ."
+        ". . . . . . . . . . . ."
+        ". . . . . . . . . . . ."
+        ". . . . . . . . . . . ."
+        ". . . . . . . . . . . ."
+        ". . . . . . . . . . . ."
+        ". . . . . . . . . . . .";
+}
+
+.item {
+    font: 1em sans-serif;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    background-color:grey;
+    border-width: 1px;
+}
+
+.item:hover {
+    background-color: indigo;
+}
+ 
