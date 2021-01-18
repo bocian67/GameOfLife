@@ -55,6 +55,10 @@
     text-transform: uppercase;
 }
 
+.button:active {
+    background-color: #B247FF;
+}
+
 .container {
     padding: 5%;
     align-content: center;
