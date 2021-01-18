@@ -1,3 +1,7 @@
+.background {
+    background-color: black;
+}
+
 .grid_container {
     display: grid;
     grid-template-columns: repeat(12, 30px);
@@ -23,11 +27,46 @@
     height: 30px;
     width: 30px;
     text-align: center;
-    background-color:grey;
+    background-color:#436436;
     border-width: 1px;
 }
 
 .item:hover {
-    background-color: indigo;
+    background-color: #4b0082;
+    cursor: pointer;
 }
- 
+
+.item.edited {
+    background-color: #1B2815;
+}
+
+.item.edited:hover {
+    background-color: #4b0082;
+    cursor: pointer;
+}
+
+.button {
+    padding: 8px 12px;
+    font-weight: 500;
+    background-color: #4B0082;
+    color: #C5C3C6;
+    border-radius: 20px;
+    border-width: 0px;
+    text-transform: uppercase;
+}
+
+.container {
+    padding: 5%;
+    align-content: center;
+    width: 100%;
+    height:max-content;
+}
+
+.header {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ED254E;
+}
+
+p {
+    color: #C5C3C6;
+}

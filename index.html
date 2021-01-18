@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html class="background">
     <head>
         <link rel="stylesheet" href="styles.css"/>
     </head>
-    <div>
-        <h1>
+    <div class="container">
+        <h1 class="header">
             LED-Matrix Game of Life
         </h1>
+        <button class="button" onclick="reset()">Reset</button>
         <div class="grid_container" id="wrapper">
             <div>
                 <p class="item" onclick="changeValue(this)">o</p>
@@ -442,9 +443,9 @@
             </div>
         </div>
         <div style="margin-top: 3rem;">
-            <button onclick="sendMatrixToPi()">Send to Matrix</button>
-            <button onclick="doRandom()">Random pattern</button>
-            <button onclick="sendTerminate()">Terminate</button>
+            <button class="button" onclick="sendMatrixToPi()">Send to Matrix</button>
+            <button class="button" onclick="doRandom()">Random pattern</button>
+            <button class="button" onclick="sendTerminate()">Terminate</button>
         </div>
     </div>
     <script src="itemChanger.js"></script>

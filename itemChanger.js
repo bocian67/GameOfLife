@@ -1,9 +1,11 @@
 function changeValue(e) {
     if(e.innerText == "o") {
         e.innerText = "x"
+        e.classList.add("edited")
     }
     else {
         e.innerText = "o"
+        e.classList.remove("edited")
     }
 }
 
@@ -31,5 +33,12 @@ function sendTerminate() {
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "http://192.168.178.239:5000/board/terminate", true);
     xhttp.send()
+}
+
+function reset() {
+    var items = document.getElementsByClassName("item")
+    for(var i = 0; i < items.length; i++) {
+        items[i].innerText = 'o'
+    }
 }
 
